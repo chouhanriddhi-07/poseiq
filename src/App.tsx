@@ -1,10 +1,11 @@
 import './App.css'
+import Camera from './components/Camera'
 
 function App() {
   return (
-    <div className="App">
-      <h1>Welcome to PoseIQ!</h1>
-      <p>This is a simple React application using TypeScript and MediaPipe.</p>
+    <div className="app">
+      <h1>PoseIQ</h1>
+      <Camera />
     </div>
   )
 }
