@@ -1,17 +1,28 @@
 import { useEffect, useRef } from "react";
 import { useMediaPipe } from "../hooks/useMediaPipe";
+import type { PoseFeedback } from "../poses/warrior2";
+import type { PoseDefinition } from "../poses";
 
-export default function Camera() {
+
+// Define what props Camera accepts
+interface Props {
+    onFeedback: (feedback: PoseFeedback) => void
+    selectedPose: PoseDefinition
+}
+
+export default function Camera({ onFeedback, selectedPose }: Props) {
     const videoRef = useRef<HTMLVideoElement>(null);
-    const canvasRef = useRef<HTMLCanvasElement>(null)
+    const canvasRef = useRef<HTMLCanvasElement>(null);
 
-    const { isLoading } = useMediaPipe(videoRef, canvasRef)
+    const { isLoading } = useMediaPipe(videoRef, canvasRef, onFeedback, selectedPose)
 
 
     useEffect(() => {
         async function startCamera() {
             try {
-                const stream = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480 } });
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: { width: 640, height: 480 }
+                });
 
                 if (videoRef.current) {
                     videoRef.current.srcObject = stream;
