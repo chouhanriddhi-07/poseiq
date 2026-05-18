@@ -1,7 +1,7 @@
 import { DrawingUtils, FilesetResolver, PoseLandmarker } from "@mediapipe/tasks-vision";
 import React, { useEffect, useRef } from "react";
-import { analyzeWarrior2, type PoseFeedback } from '../poses/warrior2';
 import type { PoseDefinition } from "../poses";
+import { type PoseFeedback } from '../poses/warrior2';
 
 export function useMediaPipe(
     videoRef: React.RefObject<HTMLVideoElement | null>,
