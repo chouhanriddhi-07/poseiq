@@ -2,7 +2,10 @@
 
 > Real-time yoga pose analysis using your webcam and AI. Get instant feedback on your form, track your score, and improve your practice — no equipment needed.
 
-![PoseIQ Demo](https://via.placeholder.com/800x400/E1F5EE/085041?text=PoseIQ+Demo+GIF+Coming+Soon)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-poseiq--riddhi.vercel.app-1D9E75?style=for-the-badge)](https://poseiq-riddhi.vercel.app/)
+
+## 🌐 Live Demo
+👉 [poseiq-riddhi.vercel.app](https://poseiq-riddhi.vercel.app/)
 
 **🚧 Active Development** — Core features are live. Hold timer, score history, and more poses are in progress.
 

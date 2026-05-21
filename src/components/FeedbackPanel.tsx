@@ -92,7 +92,7 @@ const styles: Record<string, React.CSSProperties> = {
         flexDirection: 'column',
         alignItems: 'center',
         gap: '16px',
-        fontFamily: 'system-ui, sans-serif'
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     },
     title: {
         fontSize: '18px',

@@ -1,4 +1,8 @@
-export default function Header() {
+interface Props {
+    onAboutClick: () => void
+}
+
+export default function Header({ onAboutClick }: Props) {
     return (
         <header style={styles.header}>
             {/* Logo + brand */}
@@ -14,9 +18,14 @@ export default function Header() {
 
             {/* Nav links */}
             <nav style={styles.nav}>
-                <a href="#" style={styles.navLink}>Home</a>
-                <a href="#poses" style={styles.navLink}>Poses</a>
-                <a href="#about" style={styles.navLink}>About</a>
+                {/* <a href="#analyzer" style={styles.navLink}>Poses</a> */}
+                <button
+                    onClick={onAboutClick}
+                    style={{ ...styles.navLink, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                >
+                    About
+                </button>
+
 
                 <a href="https://github.com/chouhanriddhi-07/poseiq"
                     target="_blank"
@@ -47,6 +56,7 @@ const styles: Record<string, React.CSSProperties> = {
         position: 'sticky',
         top: 0,
         zIndex: 100,
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     },
     brand: {
         display: 'flex',
@@ -67,11 +77,13 @@ const styles: Record<string, React.CSSProperties> = {
         fontWeight: 700,
         color: '#1a1a2e',
         lineHeight: 1,
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     },
     tagline: {
         fontSize: '11px',
         color: '#888',
         marginTop: '2px',
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     },
     nav: {
         display: 'flex',
@@ -84,6 +96,7 @@ const styles: Record<string, React.CSSProperties> = {
         textDecoration: 'none',
         fontWeight: 500,
         transition: 'color .15s',
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     },
     badge: {
         display: 'flex',
@@ -96,6 +109,7 @@ const styles: Record<string, React.CSSProperties> = {
         padding: '6px 12px',
         borderRadius: '99px',
         border: '0.5px solid #9FE1CB',
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     },
     liveDot: {
         width: '7px',

@@ -16,7 +16,7 @@ export default function PoseSidebar({ poses, selected, onSelect }: Props) {
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <div style={{
                 fontSize: '11px', fontWeight: 500, letterSpacing: '.07em',
-                textTransform: 'uppercase', color: '#888', marginBottom: '4px'
+                textTransform: 'uppercase', color: '#888', marginBottom: '4px', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
             }}>
                 Poses
             </div>
@@ -48,7 +48,7 @@ export default function PoseSidebar({ poses, selected, onSelect }: Props) {
                             background: isActive ? '#9FE1CB' : '#f5f5f5',
                             display: 'flex', alignItems: 'center',
                             justifyContent: 'center', fontSize: '20px',
-                            flexShrink: 0
+                            flexShrink: 0,
                         }}>
                             {pose.emoji}
                         </div>
@@ -56,7 +56,7 @@ export default function PoseSidebar({ poses, selected, onSelect }: Props) {
                         {/* Name + difficulty */}
                         <div>
                             <div style={{
-                                fontSize: '13px', fontWeight: 500,
+                                fontSize: '13px', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif", fontWeight: 500,
                                 color: isActive ? '#085041' : '#1a1a2e'
                             }}>
                                 {pose.name}
@@ -67,7 +67,7 @@ export default function PoseSidebar({ poses, selected, onSelect }: Props) {
                                     borderRadius: '50%', background: diff.dot,
                                     display: 'inline-block'
                                 }} />
-                                <span style={{ fontSize: '11px', color: diff.text }}>
+                                <span style={{ fontSize: '11px', color: diff.text, fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif", }}>
                                     {pose.difficulty}
                                 </span>
                             </div>
