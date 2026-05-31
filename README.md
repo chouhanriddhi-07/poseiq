@@ -131,9 +131,7 @@ Each pose is defined as a set of angle thresholds. For example, Warrior II requi
 - [ ] Hold timer (30s target with progress bar)
 - [ ] Session score history
 - [ ] Warrior I pose
-- [ ] Downward Dog pose
 - [ ] Mobile responsive layout
-- [ ] Snapshot / share your pose
 - [ ] Dark mode
 
 ---

@@ -128,6 +128,7 @@ const styles: Record<string, React.CSSProperties> = {
         display: 'flex',
         alignItems: 'center',
         gap: '12px',
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     },
     title: {
         fontSize: '20px',
@@ -154,6 +155,7 @@ const styles: Record<string, React.CSSProperties> = {
         display: 'flex',
         flexDirection: 'column',
         gap: '20px',
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     },
     intro: {
         fontSize: '14px',
@@ -208,6 +210,7 @@ const styles: Record<string, React.CSSProperties> = {
         color: '#085041',
         fontSize: '12px',
         fontWeight: 500,
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
         padding: '4px 10px',
         borderRadius: '99px',
         border: '0.5px solid #9FE1CB',
