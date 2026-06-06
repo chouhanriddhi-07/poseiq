@@ -6,6 +6,9 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['@mediapipe/tasks-vision']  // ← prevents Vite bundling issues with MediaPipe
   },
+  build: {
+    sourcemap: false
+  },
   server: {
     proxy: {
       '/api': {
