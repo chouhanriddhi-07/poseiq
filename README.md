@@ -63,7 +63,7 @@ npm install
 npm run dev
 ```
 
-Open `http://localhost:5173` — allow camera access when prompted.
+Open `http://localhost:5174` — allow camera access when prompted.
 
 ### Build for production
 
