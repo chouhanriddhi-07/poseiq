@@ -14,6 +14,8 @@ interface Props {
 export default function Camera({ onFeedback, selectedPose, onStop }: Props) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const streamRef = useRef<MediaStream | null>(null)
+
 
     const { isLoading } = useMediaPipe(videoRef, canvasRef, onFeedback, selectedPose)
 
@@ -24,6 +26,7 @@ export default function Camera({ onFeedback, selectedPose, onStop }: Props) {
                 const stream = await navigator.mediaDevices.getUserMedia({
                     video: { width: 640, height: 480 }
                 });
+                streamRef.current = stream
 
                 if (videoRef.current) {
                     videoRef.current.srcObject = stream;
@@ -36,12 +39,15 @@ export default function Camera({ onFeedback, selectedPose, onStop }: Props) {
         startCamera();
 
         return () => {
-            if (videoRef.current?.srcObject) {
-                const tracks = (videoRef.current.srcObject as MediaStream).getTracks();
-                tracks.forEach(track => track.stop());
+            if (streamRef.current) {
+                streamRef.current.getTracks().forEach(track => {
+                    track.stop()
+                })
+                streamRef.current = null
             }
         }
-    }, []);
+    }, [])
+
 
     return (
         <div style={{

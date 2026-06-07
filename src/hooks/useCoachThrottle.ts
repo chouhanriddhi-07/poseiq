@@ -11,6 +11,14 @@ export function useCoachThrottle(
     const SESSION_LIMIT = 20;
 
     return useCallback((feedback: PoseFeedback) => {
+        // Reset session when feedback is null (camera stopped)
+        if (!feedback) {
+            lastTriggerRef.current = 0
+            lastScoreRef.current = -1
+            totalCallsRef.current = 0
+            return
+        }
+
         const now = Date.now();
         const scoreDiff = Math.abs(feedback.score - lastScoreRef.current);
 
@@ -18,7 +26,7 @@ export function useCoachThrottle(
 
         // Only call if 5s have passed AND score changed by 10+ points
 
-        if (now - lastTriggerRef.current > intervalMs && scoreDiff >= 10) {
+        if (now - lastTriggerRef.current > intervalMs && scoreDiff > 10) {
             lastTriggerRef.current = now;
             lastScoreRef.current = feedback.score;
             totalCallsRef.current += 1;

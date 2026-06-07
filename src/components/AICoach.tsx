@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import type { PoseFeedback } from "../poses/warrior2"
 import { useCoachThrottle } from "../hooks/useCoachThrottle"
 import { theme } from "../theme"
@@ -11,9 +11,27 @@ interface Props {
 export default function AICoach({ feedback, poseName }: Props) {
     const [coachText, setCoachText] = useState<string>('')
     const [isLoading, setIsLoading] = useState(false)
+    const abortRef = useRef<AbortController | null>(null)
 
+    useEffect(() => {
+        if (!feedback) {
+            // Cancel any in-flight request
+            abortRef.current?.abort()
+            setCoachText('')
+            setIsLoading(false)
+        }
+    }, [feedback])
+
+    useEffect(() => {
+        abortRef.current?.abort()
+        setCoachText('')
+    }, [poseName])
 
     const callCoach = useCallback(async (feedback: PoseFeedback) => {
+
+        abortRef.current?.abort()
+        abortRef.current = new AbortController()
+
         setIsLoading(true)
         setCoachText('')
 
@@ -25,7 +43,8 @@ export default function AICoach({ feedback, poseName }: Props) {
                     poseName,
                     score: feedback.score,
                     failingChecks: feedback.feedback
-                })
+                }),
+                signal: abortRef.current.signal,
             })
 
             if (!response.ok) {
@@ -45,9 +64,11 @@ export default function AICoach({ feedback, poseName }: Props) {
                 setCoachText((prev: string) => prev + decoder.decode(value))
             }
 
-        } catch (error) {
-            console.error('Error fetching coach feedback:', error)
-            setCoachText('Sorry, I had trouble generating feedback. Please try again.')
+        } catch (err: unknown) {
+            // AbortError is expected when Stop is clicked — don't log it as an error
+            if (err instanceof Error && err.name === 'AbortError') return
+            console.error('Coach error:', err)
+            setCoachText('Unable to connect to coach.')
         } finally {
             setIsLoading(false)
         }
@@ -58,6 +79,10 @@ export default function AICoach({ feedback, poseName }: Props) {
 
     // Trigger whenever feedback updates
     if (feedback) throttledTrigger(feedback)
+
+    useEffect(() => {
+        return () => abortRef.current?.abort()
+    }, [])
 
     return (
         <div style={styles.box}>
