@@ -1,4 +1,5 @@
 import type { PoseDefinition } from '../poses'
+import { theme } from '../theme'
 
 interface Props {
     poses: PoseDefinition[]
@@ -7,16 +8,16 @@ interface Props {
 }
 
 const difficultyColor: Record<string, { bg: string; text: string; dot: string }> = {
-    Beginner: { bg: '#E1F5EE', text: '#085041', dot: '#1D9E75' },
-    Intermediate: { bg: '#FAEEDA', text: '#633806', dot: '#EF9F27' },
+    Beginner: { bg: '#E1F5EE', text: 'theme.lavenderDark', dot: 'theme.lavenderAccent' },
+    Intermediate: { bg: '#FAEEDA', text: '#854F0B', dot: '#EF9F27' },
 }
 
 export default function PoseSidebar({ poses, selected, onSelect }: Props) {
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', padding: '16px 12px', background: '#ffffff', borderRight: '0.5px solid #DDD8FA', minHeight: '100%', }}>
             <div style={{
                 fontSize: '11px', fontWeight: 500, letterSpacing: '.07em',
-                textTransform: 'uppercase', color: '#888', marginBottom: '4px', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+                textTransform: 'uppercase', color: theme.lavenderMuted, marginBottom: '4px', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
             }}>
                 Poses
             </div>
@@ -30,8 +31,8 @@ export default function PoseSidebar({ poses, selected, onSelect }: Props) {
                         key={pose.id}
                         onClick={() => onSelect(pose)}
                         style={{
-                            background: isActive ? '#E1F5EE' : '#ffffff',
-                            border: `0.5px solid ${isActive ? '#1D9E75' : '#e0e0e0'}`,
+                            background: isActive ? theme.lavenderBg : theme.white,
+                            border: `0.5px solid ${isActive ? theme.lavenderBorder : '#e0e0e0'}`,
                             borderRadius: '8px',
                             padding: '10px 12px',
                             cursor: 'pointer',
@@ -42,14 +43,7 @@ export default function PoseSidebar({ poses, selected, onSelect }: Props) {
                         }}
                     >
                         {/* Emoji icon */}
-                        <div style={{
-                            width: '36px', height: '36px',
-                            borderRadius: '8px',
-                            background: isActive ? '#9FE1CB' : '#f5f5f5',
-                            display: 'flex', alignItems: 'center',
-                            justifyContent: 'center', fontSize: '20px',
-                            flexShrink: 0,
-                        }}>
+                        <div style={{ fontSize: '20px', width: '28px', textAlign: 'center', flexShrink: 0 }}>
                             {pose.emoji}
                         </div>
 
@@ -57,7 +51,7 @@ export default function PoseSidebar({ poses, selected, onSelect }: Props) {
                         <div>
                             <div style={{
                                 fontSize: '13px', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif", fontWeight: 500,
-                                color: isActive ? '#085041' : '#1a1a2e'
+                                color: isActive ? theme.lavenderDeep : theme.textPrimary
                             }}>
                                 {pose.name}
                             </div>

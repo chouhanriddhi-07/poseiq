@@ -8,9 +8,10 @@ import type { PoseDefinition } from "../poses";
 interface Props {
     onFeedback: (feedback: PoseFeedback) => void
     selectedPose: PoseDefinition
+    onStop: () => void
 }
 
-export default function Camera({ onFeedback, selectedPose }: Props) {
+export default function Camera({ onFeedback, selectedPose, onStop }: Props) {
     const videoRef = useRef<HTMLVideoElement>(null);
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -43,7 +44,67 @@ export default function Camera({ onFeedback, selectedPose }: Props) {
     }, []);
 
     return (
-        <div style={{ position: 'relative', width: '640px', height: '480px' }}>
+        <div style={{
+            position: 'relative',
+            width: '100%',
+            flex: 1,
+            minHeight: '300px',
+            borderRadius: '12px',
+            overflow: 'hidden',
+            background: '#111',
+        }}>
+
+            {/* Live dot — top left */}
+            <div style={{
+                position: 'absolute',
+                top: '12px',
+                left: '12px',
+                zIndex: 10,
+                background: 'rgba(0,0,0,0.5)',
+                color: '#fff',
+                fontSize: '11px',
+                fontWeight: 500,
+                padding: '4px 10px',
+                borderRadius: '99px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '6px',
+            }}>
+                <span style={{
+                    width: '7px',
+                    height: '7px',
+                    borderRadius: '50%',
+                    background: '#D4537E',
+                    display: 'inline-block',
+                    animation: 'pulse 1.5s infinite',
+                }} />
+                Live
+            </div>
+
+            {/* Stop button — top right corner of camera */}
+            <button
+                onClick={onStop}
+                style={{
+                    position: 'absolute',
+                    top: '12px',
+                    right: '12px',
+                    zIndex: 10,
+                    background: 'rgba(0,0,0,0.55)',
+                    color: '#fff',
+                    border: '0.5px solid rgba(255,255,255,0.3)',
+                    borderRadius: '8px',
+                    padding: '6px 12px',
+                    fontSize: '12px',
+                    fontWeight: 500,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                }}
+            >
+                ⏹ Stop
+            </button>
+
             {isLoading && (
                 <div style={{
                     position: 'absolute', inset: 0,
@@ -60,8 +121,9 @@ export default function Camera({ onFeedback, selectedPose }: Props) {
                 autoPlay playsInline muted
                 style={{
                     position: 'absolute', top: 0, left: 0,
-                    width: '640px', height: '480px',
-                    transform: 'scaleX(-1)'   // mirror like a selfie camera
+                    width: '100%', height: '100%',
+                    transform: 'scaleX(-1)',// mirror like a selfie camera
+                    objectFit: 'cover',
                 }}
             />
 
@@ -70,7 +132,7 @@ export default function Camera({ onFeedback, selectedPose }: Props) {
                 ref={canvasRef}
                 style={{
                     position: 'absolute', top: 0, left: 0,
-                    width: '640px', height: '480px',
+                    width: '100%', height: '100%',
                     transform: 'scaleX(-1)',  // mirror to match video
                     zIndex: 1
                 }}

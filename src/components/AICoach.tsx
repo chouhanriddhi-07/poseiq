@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react"
 import type { PoseFeedback } from "../poses/warrior2"
 import { useCoachThrottle } from "../hooks/useCoachThrottle"
+import { theme } from "../theme"
 
 interface Props {
     feedback: PoseFeedback | null
@@ -78,13 +79,13 @@ export default function AICoach({ feedback, poseName }: Props) {
 
 const styles: Record<string, React.CSSProperties> = {
     box: {
-        background: '#ffffff',
-        border: '0.5px solid #e0e0e0',
-        borderRadius: '12px',
+        background: theme.white,
+        // border: `0.5px solid ${theme.lavenderBorder}`,
+        border: '0.5px solid #DDD8FA',
+        borderRadius: '10px',
         padding: '14px 16px',
-        marginTop: '12px',
-        fontFamily: 'system-ui, sans-serif',
-        minHeight: '80px',
+        width: '100%',
+        minHeight: '72px',
     },
     header: {
         display: 'flex',
@@ -92,20 +93,20 @@ const styles: Record<string, React.CSSProperties> = {
         gap: '8px',
         fontSize: '12px',
         fontWeight: 500,
-        color: '#085041',
+        color: theme.lavenderDark,
         marginBottom: '8px',
     },
     dot: {
         width: '7px',
         height: '7px',
         borderRadius: '50%',
-        background: '#1D9E75',
+        background: theme.roseAccent,
         display: 'inline-block',
         animation: 'pulse 1s infinite',
     },
     text: {
         fontSize: '13px',
-        color: '#444',
+        color: theme.textPrimary,
         lineHeight: 1.65,
         margin: 0,
     }

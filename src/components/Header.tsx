@@ -1,3 +1,6 @@
+import { theme } from '../theme'
+import Logo from './Logo'
+
 interface Props {
     onAboutClick: () => void
 }
@@ -5,27 +8,25 @@ interface Props {
 export default function Header({ onAboutClick }: Props) {
     return (
         <header style={styles.header}>
-            {/* Logo + brand */}
+
+            {/* Brand */}
             <div style={styles.brand}>
-                <div style={styles.logoMark}>
-                    <span style={{ fontSize: '20px' }}>🧘</span>
-                </div>
+                <Logo size={40} />
                 <div>
                     <div style={styles.logoText}>PoseIQ</div>
                     <div style={styles.tagline}>AI-powered yoga analysis</div>
                 </div>
             </div>
 
-            {/* Nav links */}
+            {/* Nav */}
             <nav style={styles.nav}>
-                {/* <a href="#analyzer" style={styles.navLink}>Poses</a> */}
+
                 <button
                     onClick={onAboutClick}
-                    style={{ ...styles.navLink, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}
+                    style={styles.navBtn}
                 >
                     About
                 </button>
-
 
                 <a href="https://github.com/chouhanriddhi-07/poseiq"
                     target="_blank"
@@ -36,12 +37,13 @@ export default function Header({ onAboutClick }: Props) {
                 </a>
             </nav>
 
-            {/* Badge */}
+            {/* Live badge */}
             <div style={styles.badge}>
                 <span style={styles.liveDot} />
                 Live AI analysis
             </div>
-        </header >
+
+        </header>
     )
 }
 
@@ -51,39 +53,27 @@ const styles: Record<string, React.CSSProperties> = {
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '12px 24px',
-        background: '#ffffff',
-        borderBottom: '0.5px solid #e0e0e0',
+        background: theme.white,
+        borderBottom: `0.5px solid ${theme.lavenderBorder}`,
         position: 'sticky',
         top: 0,
         zIndex: 100,
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     },
     brand: {
         display: 'flex',
         alignItems: 'center',
         gap: '10px',
     },
-    logoMark: {
-        width: '40px',
-        height: '40px',
-        background: '#E1F5EE',
-        borderRadius: '10px',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
     logoText: {
         fontSize: '18px',
         fontWeight: 700,
-        color: '#1a1a2e',
+        color: theme.lavenderDeep,
         lineHeight: 1,
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     },
     tagline: {
         fontSize: '11px',
-        color: '#888',
+        color: theme.lavenderMuted,
         marginTop: '2px',
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     },
     nav: {
         display: 'flex',
@@ -92,32 +82,37 @@ const styles: Record<string, React.CSSProperties> = {
     },
     navLink: {
         fontSize: '13px',
-        color: '#555',
+        color: theme.lavenderDark,
         textDecoration: 'none',
         fontWeight: 500,
-        transition: 'color .15s',
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+    },
+    navBtn: {
+        fontSize: '13px',
+        color: theme.lavenderDark,
+        fontWeight: 500,
+        background: 'none',
+        border: 'none',
+        cursor: 'pointer',
+        padding: 0,
     },
     badge: {
         display: 'flex',
         alignItems: 'center',
         gap: '6px',
-        background: '#E1F5EE',
-        color: '#085041',
+        background: theme.lavenderBg,
+        color: theme.lavenderDark,
         fontSize: '12px',
         fontWeight: 500,
         padding: '6px 12px',
         borderRadius: '99px',
-        border: '0.5px solid #9FE1CB',
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+        border: `0.5px solid ${theme.lavenderBorder}`,
     },
     liveDot: {
         width: '7px',
         height: '7px',
         borderRadius: '50%',
-        background: '#1D9E75',
+        background: theme.lavenderAccent,
         display: 'inline-block',
         animation: 'pulse 2s infinite',
-    }
-
+    },
 }

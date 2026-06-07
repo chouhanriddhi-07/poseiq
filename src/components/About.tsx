@@ -1,3 +1,6 @@
+import { theme } from '../theme'
+import Logo from './Logo'
+
 interface Props {
     isOpen: boolean
     onClose: () => void
@@ -7,20 +10,13 @@ export default function AboutModal({ isOpen, onClose }: Props) {
     if (!isOpen) return null
 
     return (
-        // Backdrop — clicking outside closes the modal
-        <div
-            onClick={onClose}
-            style={styles.backdrop}
-        >
-            {/* Modal box — stop click from bubbling to backdrop */}
-            <div
-                onClick={e => e.stopPropagation()}
-                style={styles.modal}
-            >
+        <div onClick={onClose} style={styles.backdrop}>
+            <div onClick={e => e.stopPropagation()} style={styles.modal}>
+
                 {/* Header */}
                 <div style={styles.modalHeader}>
                     <div style={styles.brand}>
-                        <span style={{ fontSize: '28px' }}>🧘</span>
+                        <Logo size={32} />
                         <div>
                             <div style={styles.title}>PoseIQ</div>
                             <div style={styles.subtitle}>AI-Powered Yoga Pose Analyzer</div>
@@ -37,7 +33,6 @@ export default function AboutModal({ isOpen, onClose }: Props) {
                         no data sent to any server. Everything runs privately in your browser.
                     </p>
 
-                    {/* How it works */}
                     <div style={styles.sectionTitle}>How it works</div>
                     <div style={styles.steps}>
                         {[
@@ -56,31 +51,28 @@ export default function AboutModal({ isOpen, onClose }: Props) {
                         ))}
                     </div>
 
-                    {/* Tech stack */}
                     <div style={styles.sectionTitle}>Built with</div>
                     <div style={styles.techRow}>
-                        {['React', 'TypeScript', 'MediaPipe', 'Vite', 'Vercel'].map(t => (
+                        {['React', 'TypeScript', 'MediaPipe', 'Claude AI', 'Vite', 'Vercel'].map(t => (
                             <span key={t} style={styles.techBadge}>{t}</span>
                         ))}
                     </div>
 
-                    {/* Status */}
                     <div style={styles.statusBox}>
                         <span style={styles.wip}>🚧 Actively in development</span>
-                        <p style={{
-                            fontSize: '12px', color: '#633806', margin: '4px 0 0', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
-                        }}>
+                        <p style={{ fontSize: '12px', color: '#633806', margin: '4px 0 0' }}>
                             Hold timer, score history, and more poses coming soon.
                         </p>
                     </div>
 
-                    {/* Author */}
                     <div style={styles.author}>
                         <div style={styles.avatar}>RC</div>
                         <div>
-                            <div style={{ fontWeight: 600, fontSize: '14px', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}>Riddhi Chouhan</div>
-                            <div style={{ fontSize: '12px', color: '#888', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}>
-                                Lead Software Engineer · Built as a portfolio project
+                            <div style={{ fontWeight: 600, fontSize: '14px', color: theme.lavenderDeep }}>
+                                Riddhi Chouhan
+                            </div>
+                            <div style={{ fontSize: '12px', color: theme.lavenderMuted }}>
+                                Lead Software Engineer · Portfolio project
                             </div>
                         </div>
 
@@ -101,7 +93,7 @@ export default function AboutModal({ isOpen, onClose }: Props) {
 const styles: Record<string, React.CSSProperties> = {
     backdrop: {
         position: 'fixed', inset: 0,
-        background: 'rgba(0,0,0,0.5)',
+        background: 'rgba(38,33,92,0.4)',
         zIndex: 200,
         display: 'flex',
         alignItems: 'center',
@@ -109,43 +101,43 @@ const styles: Record<string, React.CSSProperties> = {
         padding: '16px',
     },
     modal: {
-        background: '#ffffff',
+        background: theme.white,
         borderRadius: '16px',
         width: '100%',
         maxWidth: '520px',
         maxHeight: '90vh',
         overflow: 'auto',
-        boxShadow: '0 20px 60px rgba(0,0,0,0.2)',
+        border: `0.5px solid ${theme.lavenderBorder}`,
     },
     modalHeader: {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: '20px 24px',
-        borderBottom: '0.5px solid #e0e0e0',
+        borderBottom: `0.5px solid ${theme.lavenderBorder}`,
+        background: theme.lavenderSurface,
     },
     brand: {
         display: 'flex',
         alignItems: 'center',
         gap: '12px',
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     },
     title: {
         fontSize: '20px',
         fontWeight: 700,
-        color: '#1a1a2e',
+        color: theme.lavenderDeep,
         lineHeight: 1,
     },
     subtitle: {
         fontSize: '12px',
-        color: '#888',
+        color: theme.lavenderMuted,
         marginTop: '2px',
     },
     closeBtn: {
         background: 'none',
         border: 'none',
         fontSize: '18px',
-        color: '#888',
+        color: theme.lavenderMuted,
         cursor: 'pointer',
         padding: '4px 8px',
         borderRadius: '6px',
@@ -155,12 +147,11 @@ const styles: Record<string, React.CSSProperties> = {
         display: 'flex',
         flexDirection: 'column',
         gap: '20px',
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
     },
     intro: {
         fontSize: '14px',
         lineHeight: 1.7,
-        color: '#444',
+        color: theme.textPrimary,
         margin: 0,
     },
     sectionTitle: {
@@ -168,19 +159,20 @@ const styles: Record<string, React.CSSProperties> = {
         fontWeight: 600,
         letterSpacing: '.07em',
         textTransform: 'uppercase',
-        color: '#888',
+        color: theme.lavenderMuted,
         marginBottom: '-8px',
     },
     steps: {
         display: 'flex',
         flexDirection: 'column',
-        gap: '12px',
+        gap: '10px',
     },
     step: {
         display: 'flex',
         alignItems: 'flex-start',
         gap: '12px',
-        background: '#f9f9f9',
+        background: theme.lavenderSurface,
+        border: `0.5px solid ${theme.lavenderBorder}`,
         borderRadius: '10px',
         padding: '12px',
     },
@@ -192,12 +184,12 @@ const styles: Record<string, React.CSSProperties> = {
     stepTitle: {
         fontSize: '13px',
         fontWeight: 600,
-        color: '#1a1a2e',
+        color: theme.lavenderDeep,
         marginBottom: '2px',
     },
     stepDesc: {
         fontSize: '12px',
-        color: '#666',
+        color: theme.textSecondary,
         lineHeight: 1.5,
     },
     techRow: {
@@ -206,14 +198,13 @@ const styles: Record<string, React.CSSProperties> = {
         gap: '8px',
     },
     techBadge: {
-        background: '#E1F5EE',
-        color: '#085041',
+        background: theme.lavenderBg,
+        color: theme.lavenderDark,
         fontSize: '12px',
         fontWeight: 500,
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
         padding: '4px 10px',
         borderRadius: '99px',
-        border: '0.5px solid #9FE1CB',
+        border: `0.5px solid ${theme.lavenderBorder}`,
     },
     statusBox: {
         background: '#FAEEDA',
@@ -231,15 +222,16 @@ const styles: Record<string, React.CSSProperties> = {
         alignItems: 'center',
         gap: '12px',
         padding: '14px',
-        background: '#f9f9f9',
+        background: theme.lavenderSurface,
+        border: `0.5px solid ${theme.lavenderBorder}`,
         borderRadius: '10px',
     },
     avatar: {
         width: '40px',
         height: '40px',
         borderRadius: '50%',
-        background: '#1D9E75',
-        color: '#fff',
+        background: theme.lavenderAccent,
+        color: theme.white,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',

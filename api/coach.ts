@@ -26,7 +26,6 @@ export default async function handler(
     res: ServerResponse
 ) {
 
-    console.log('-----------------> API KEY:', process.env.ANTHROPIC_API_KEY ? 'FOUND' : 'UNDEFINED')
     // Handle CORS preflight
     res.setHeader('Access-Control-Allow-Origin', '*')
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS')

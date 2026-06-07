@@ -1,26 +1,29 @@
+import { theme } from '../theme'
 import type { PoseFeedback } from '../poses/warrior2'
+import Logo from './Logo'
 
 interface Props {
     feedback: PoseFeedback | null
 }
 
 export default function FeedbackPanel({ feedback }: Props) {
+
     if (!feedback) {
         return (
             <div style={styles.panel}>
                 <h2 style={styles.title}>PoseIQ Analysis</h2>
                 <div style={styles.waiting}>
-                    <span style={{ fontSize: '48px' }}>🧘</span>
-                    <p style={{ marginTop: '12px', color: '#888' }}>
-                        Get into Warrior II position to start analysis
+                    <span style={{ fontSize: '48px' }}> <Logo size={48} /> </span>
+                    <p style={{ marginTop: '12px', color: theme.lavenderMuted, fontSize: '13px' }}>
+                        Get into a pose to start analysis
                     </p>
                 </div>
             </div>
         )
     }
 
-    const ringColor = feedback.score >= 75 ? '#1D9E75' :
-        feedback.score >= 50 ? '#EF9F27' : '#E53935'
+    const ringColor = feedback.score >= 75 ? theme.lavenderAccent :
+        feedback.score >= 50 ? theme.roseAccent : '#E24B4A'
 
     return (
         <div style={styles.panel}>
@@ -29,10 +32,11 @@ export default function FeedbackPanel({ feedback }: Props) {
             {/* Score ring */}
             <div style={styles.scoreWrapper}>
                 <svg width="120" height="120" viewBox="0 0 120 120">
-                    {/* Background ring */}
                     <circle cx="60" cy="60" r="50"
-                        fill="none" stroke="#e0e0e0" strokeWidth="10" />
-                    {/* Score ring — strokeDasharray animates the fill */}
+                        fill="none"
+                        stroke={theme.lavenderBorder}
+                        strokeWidth="10"
+                    />
                     <circle cx="60" cy="60" r="50"
                         fill="none"
                         stroke={ringColor}
@@ -46,7 +50,7 @@ export default function FeedbackPanel({ feedback }: Props) {
                         {feedback.score}
                     </text>
                     <text x="60" y="72" textAnchor="middle"
-                        style={{ fontSize: '11px', fill: '#888' }}>
+                        style={{ fontSize: '11px', fill: theme.lavenderMuted }}>
                         / 100
                     </text>
                 </svg>
@@ -55,22 +59,23 @@ export default function FeedbackPanel({ feedback }: Props) {
                     marginTop: '8px',
                     fontWeight: 600,
                     color: ringColor,
-                    fontSize: '16px'
+                    fontSize: '16px',
                 }}>
                     {feedback.score >= 75 ? '✅ Good form!' :
                         feedback.score >= 50 ? '⚠️ Getting there' : '❌ Needs work'}
                 </p>
             </div>
 
-            {/* Pose name */}
+            {/* Pose badge */}
             <div style={styles.poseBadge}>Warrior II</div>
 
-            {/* Feedback messages */}
+            {/* Feedback list */}
             <ul style={styles.list}>
                 {feedback.feedback.map((msg, i) => (
                     <li key={i} style={{
                         ...styles.listItem,
-                        borderLeft: `3px solid ${feedback.isCorrect ? '#1D9E75' : '#EF9F27'}`
+                        borderLeft: `3px solid ${feedback.isCorrect ? theme.lavenderAccent : theme.roseAccent}`,
+                        background: feedback.isCorrect ? theme.lavenderSurface : '#FDF0F5'
                     }}>
                         {feedback.isCorrect ? '✅' : '⚠️'} {msg}
                     </li>
@@ -82,24 +87,23 @@ export default function FeedbackPanel({ feedback }: Props) {
 
 const styles: Record<string, React.CSSProperties> = {
     panel: {
-        width: '280px',
-        minHeight: '480px',
         background: '#ffffff',
-        borderRadius: '16px',
-        padding: '24px',
-        boxShadow: '0 4px 24px rgba(0,0,0,0.08)',
+        borderLeft: '0.5px solid #DDD8FA',
+        borderRadius: '0',
+        padding: '20px 16px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         gap: '16px',
-        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+        minHeight: '100%',
+        width: '100%',
     },
     title: {
         fontSize: '18px',
         fontWeight: 700,
-        color: '#1a1a2e',
+        color: theme.lavenderDeep,
         margin: 0,
-        alignSelf: 'flex-start'
+        alignSelf: 'flex-start',
     },
     waiting: {
         flex: 1,
@@ -107,22 +111,23 @@ const styles: Record<string, React.CSSProperties> = {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        textAlign: 'center'
+        textAlign: 'center',
     },
     scoreWrapper: {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        gap: '4px'
+        gap: '4px',
     },
     poseBadge: {
-        background: '#E1F5EE',
-        color: '#085041',
+        background: theme.lavenderBg,
+        color: theme.lavenderDark,
         fontSize: '12px',
         fontWeight: 600,
         padding: '4px 12px',
         borderRadius: '99px',
-        letterSpacing: '0.05em'
+        border: `0.5px solid ${theme.lavenderBorder}`,
+        letterSpacing: '0.05em',
     },
     list: {
         listStyle: 'none',
@@ -131,14 +136,15 @@ const styles: Record<string, React.CSSProperties> = {
         width: '100%',
         display: 'flex',
         flexDirection: 'column',
-        gap: '8px'
+        gap: '8px',
     },
     listItem: {
         fontSize: '13px',
-        color: '#333',
-        background: '#f9f9f9',
+        color: theme.textPrimary,
+        background: theme.lavenderSurface,
         padding: '10px 12px',
         borderRadius: '8px',
-        lineHeight: '1.5'
-    }
+        lineHeight: '1.5',
+        listStyle: 'none',
+    },
 }
