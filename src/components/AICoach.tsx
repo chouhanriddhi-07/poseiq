@@ -54,7 +54,7 @@ export default function AICoach({ feedback, poseName }: Props) {
     }, [poseName])
 
     // Throttled trigger — only fires every 5s when score changes significantly
-    const throttledTrigger = useCoachThrottle(callCoach)
+    const throttledTrigger = useCoachThrottle(callCoach, 15000)
 
     // Trigger whenever feedback updates
     if (feedback) throttledTrigger(feedback)
