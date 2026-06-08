@@ -4,9 +4,10 @@ import Logo from './Logo'
 
 interface Props {
     feedback: PoseFeedback | null
+    poseName?: string
 }
 
-export default function FeedbackPanel({ feedback }: Props) {
+export default function FeedbackPanel({ feedback, poseName }: Props) {
 
     if (!feedback) {
         return (
@@ -67,7 +68,7 @@ export default function FeedbackPanel({ feedback }: Props) {
             </div>
 
             {/* Pose badge */}
-            <div style={styles.poseBadge}>Warrior II</div>
+            <div style={styles.poseBadge}>{poseName}</div>
 
             {/* Feedback list */}
             <ul style={styles.list}>

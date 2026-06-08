@@ -53,8 +53,16 @@ export default function AboutModal({ isOpen, onClose }: Props) {
 
                     <div style={styles.sectionTitle}>Built with</div>
                     <div style={styles.techRow}>
-                        {['React', 'TypeScript', 'MediaPipe', 'Claude AI', 'Vite', 'Vercel'].map(t => (
-                            <span key={t} style={styles.techBadge}>{t}</span>
+                        {['React', 'TypeScript', 'MediaPipe', 'Claude AI', 'Vite', 'Vercel'].map((t, i) => (
+                            <span key={t} style={{
+                                ...styles.techBadge,
+                                // Even index → lavender, odd index → rose
+                                background: i % 2 === 0 ? theme.lavenderBg : theme.roseBg,
+                                color: i % 2 === 0 ? theme.lavenderDark : theme.roseDark,
+                                border: `0.5px solid ${i % 2 === 0 ? theme.lavenderBorder : '#F5C0D6'}`,
+                            }}>
+                                {t}
+                            </span>
                         ))}
                     </div>
 
@@ -115,7 +123,7 @@ const styles: Record<string, React.CSSProperties> = {
         justifyContent: 'space-between',
         padding: '20px 24px',
         borderBottom: `0.5px solid ${theme.lavenderBorder}`,
-        background: theme.lavenderSurface,
+        background: `linear-gradient(135deg, ${theme.lavenderSurface} 0%, ${theme.roseBg} 100%)`,
     },
     brand: {
         display: 'flex',
@@ -230,7 +238,7 @@ const styles: Record<string, React.CSSProperties> = {
         width: '40px',
         height: '40px',
         borderRadius: '50%',
-        background: theme.lavenderAccent,
+        background: theme.roseAccent,
         color: theme.white,
         display: 'flex',
         alignItems: 'center',

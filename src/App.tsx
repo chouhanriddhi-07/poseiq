@@ -69,7 +69,7 @@ function App() {
                 'Live coaching from Claude AI',
               ].map((f, i) => (
                 <div key={i} style={styles.featureRow}>
-                  <span style={{ color: theme.lavenderAccent, fontWeight: 600, marginRight: '8px' }}>→</span>
+                  <span style={{ color: theme.roseAccent, fontWeight: 600, marginRight: '8px' }}>→</span>
                   {f}
                 </div>
               ))}
@@ -185,7 +185,7 @@ function DesktopLayout({
       </div>
 
       {/* Right column — live score + feedback items */}
-      <FeedbackPanel feedback={feedback} />
+      <FeedbackPanel feedback={feedback} poseName={selectedPose.name} />
     </div>
   )
 }
@@ -427,7 +427,7 @@ const styles: Record<string, React.CSSProperties> = {
     textAlign: 'left',
   },
   startBtn: {
-    background: theme.lavenderAccent,
+    background: `linear-gradient(135deg, ${theme.lavenderAccent} 0%, ${theme.roseAccent} 100%)`,
     color: theme.white,
     border: 'none',
     borderRadius: '10px',
@@ -440,7 +440,7 @@ const styles: Record<string, React.CSSProperties> = {
   },
   poseHint: {
     fontSize: '12px',
-    color: theme.lavenderMuted,
+    color: theme.roseAccent,
     margin: 0,
   },
 }
