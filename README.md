@@ -22,6 +22,16 @@ PoseIQ uses your webcam and Google's MediaPipe AI to analyze your yoga poses in 
 
 ---
 
+## Demo
+
+> 📸 *Screenshot — Warrior II analysis with live AI coaching*
+
+| Start screen | Live analysis |
+|---|---|
+| ![Start screen](public/screenshot-start.png) | ![Live analysis](public/screenshot-live.png) |
+
+---
+
 ## Features
 
 - **Real-time pose detection** — MediaPipe tracks 33 body keypoints at 30fps directly in the browser
