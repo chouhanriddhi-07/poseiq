@@ -53,16 +53,8 @@ export default function AboutModal({ isOpen, onClose }: Props) {
 
                     <div style={styles.sectionTitle}>Built with</div>
                     <div style={styles.techRow}>
-                        {['React', 'TypeScript', 'MediaPipe', 'Claude AI', 'Vite', 'Vercel'].map((t, i) => (
-                            <span key={t} style={{
-                                ...styles.techBadge,
-                                // Even index → lavender, odd index → rose
-                                background: i % 2 === 0 ? theme.lavenderBg : theme.roseBg,
-                                color: i % 2 === 0 ? theme.lavenderDark : theme.roseDark,
-                                border: `0.5px solid ${i % 2 === 0 ? theme.lavenderBorder : '#F5C0D6'}`,
-                            }}>
-                                {t}
-                            </span>
+                        {['React', 'TypeScript', 'MediaPipe', 'Claude AI', 'Vite', 'Vercel'].map(t => (
+                            <span key={t} style={styles.techBadge}>{t}</span>
                         ))}
                     </div>
 
